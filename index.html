@@ -1,0 +1,2157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Takyma Investment Pioneer · Presentación Activa Panamá</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #0c0c0d;
+            --color-surface: rgba(22, 22, 26, 0.85);
+            --color-surface-light: rgba(31, 31, 36, 0.95);
+            --color-primary: #d4b483;
+            --color-primary-bright: #e8cf9e;
+            --color-eco: #8f9b77;
+            --color-sec: #a07c7c;
+            --color-text: #f5f5f5;
+            --color-text-muted: #9a9a9a;
+            --color-border: rgba(255, 255, 255, 0.08);
+            --font-serif: 'Cormorant Garamond', serif;
+            --font-sans: 'Montserrat', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: var(--color-text);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            font-weight: 300;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* FONDO CINEMATOGRÁFICO DE LOS MANGLARES */
+        .bg-video-wrapper {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 0;
+            overflow: hidden;
+            display: none;
+        }
+        .bg-manglar-video {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%; min-height: 100%;
+            width: auto; height: auto;
+            object-fit: cover;
+            /* Antes: brightness(0.35) blur(1px) saturate(1.1) — demasiado oscuro.
+               Ahora más luminoso para que se vea el manglar, con blur sutil para no competir con el texto. */
+            filter: brightness(0.65) blur(0.5px) saturate(1.2) contrast(1.05);
+        }
+        .bg-manglar-vignette {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            /* Antes: rgba(0,0,0,0.65) en el radial y 0.5/0.9 en los extremos lineales.
+               Ahora más suave: el centro queda casi libre para que se vea el manglar,
+               y solo los bordes aportan profundidad cinematográfica. */
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.35) 100%),
+                        linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, transparent 25%, transparent 75%, rgba(0,0,0,0.6) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 30px;
+            width: 100%;
+            box-sizing: border-box;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 40px;
+            gap: 10px;
+        }
+
+        .lang-btn, .mute-btn {
+            background: rgba(22, 22, 26, 0.6);
+            border: 1px solid var(--color-primary);
+            color: var(--color-primary);
+            padding: 10px 24px;
+            font-family: var(--font-sans);
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .lang-btn:hover, .mute-btn:hover {
+            background: var(--color-primary);
+            color: #0c0c0d;
+            box-shadow: 0 4px 15px rgba(212, 180, 131, 0.3);
+        }
+
+        /* Lock Screen */
+        .lock-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            animation: fadeInUp 1s ease;
+            background: radial-gradient(circle at center, #16161a 0%, #0c0c0d 90%);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+        }
+
+        .logo-glow {
+            width: 140px;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .logo-glow::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--color-primary);
+            filter: blur(50px);
+            opacity: 0.3;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .main-logo {
+            max-width: 140px;
+            max-height: 140px;
+            object-fit: contain;
+            position: relative;
+            z-index: 2;
+            filter: brightness(1.2);
+        }
+
+        .lock-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            color: var(--color-text);
+            margin: 0 0 10px 0;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        .lock-subtitle {
+            color: var(--color-primary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+        }
+
+        .access-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .pass-input {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-primary);
+            padding: 15px 20px;
+            color: var(--color-text);
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            text-align: center;
+            letter-spacing: 2px;
+            border-radius: 2px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .pass-input:focus {
+            background: rgba(212, 180, 131, 0.05);
+            border-color: var(--color-primary-bright);
+        }
+
+        .submit-btn {
+            background: transparent;
+            border: 1px solid var(--color-primary);
+            color: var(--color-primary);
+            padding: 15px 30px;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.9rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--color-primary);
+            color: #0c0c0d;
+            box-shadow: 0 8px 20px rgba(212, 180, 131, 0.3);
+        }
+
+        .error-text {
+            color: var(--color-sec);
+            font-size: 0.8rem;
+            margin-top: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            height: 15px;
+        }
+
+        /* Dashboard (Unlocked) */
+        .dashboard {
+            display: none;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 1.5s ease;
+            background: transparent;
+        }
+
+        .dashboard-logo {
+            max-height: 60px;
+            max-width: 250px;
+            object-fit: contain;
+            margin-bottom: 40px;
+            filter: brightness(1.2) drop-shadow(0 4px 15px rgba(0,0,0,0.8));
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.9);
+        }
+
+        header h1 {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            color: var(--color-text);
+            font-weight: 500;
+            margin: 0;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        header h2 {
+            font-family: var(--font-sans);
+            font-weight: 300;
+            color: var(--color-primary);
+            margin: 15px 0 0;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        /* --- HUB DE NAVEGACIÓN --- */
+        .hub-view {
+            width: 100%;
+            max-width: 900px;
+            animation: fadeIn 0.8s ease;
+        }
+        .hub-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 20px;
+        }
+        @media (max-width: 768px) {
+            .hub-grid { grid-template-columns: 1fr; }
+        }
+        .hub-card {
+            background: var(--color-surface);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--color-border);
+            padding: 40px 30px;
+            border-radius: 2px;
+            text-decoration: none;
+            color: var(--color-text);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 220px;
+            cursor: pointer;
+        }
+        .hub-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 2px;
+            background: var(--color-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .hub-card:hover {
+            background: var(--color-surface-light);
+            border-color: rgba(212, 180, 131, 0.3);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            transform: translateY(-5px);
+        }
+        .hub-card:hover::after { transform: scaleX(1); }
+        .hub-roman {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            color: var(--color-primary);
+            opacity: 0.3;
+            margin-bottom: 10px;
+        }
+        .hub-title {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin: 0 0 15px 0;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .hub-desc {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            font-weight: 300;
+            max-width: 300px;
+            margin: 0 0 20px 0;
+        }
+        .hub-btn {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid var(--color-primary);
+            color: var(--color-primary);
+            padding: 10px 24px;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.7rem;
+        }
+        .hub-card:hover .hub-btn {
+            background: var(--color-primary);
+            color: #0c0c0d;
+        }
+
+        /* --- VISTA DEL CARRUSEL --- */
+        .carousel-view {
+            width: 100%;
+            max-width: 800px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+        .back-btn {
+            background: rgba(22, 22, 26, 0.6);
+            border: 1px solid var(--color-text-muted);
+            color: var(--color-text-muted);
+            padding: 8px 20px;
+            font-family: var(--font-sans);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            align-self: flex-start;
+            backdrop-filter: blur(8px);
+        }
+        .back-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .category-header {
+            text-align: center;
+            margin-bottom: 25px;
+            min-height: 40px;
+        }
+        .category-title {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: var(--color-primary-bright);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            border-bottom: 1px solid var(--color-border);
+            display: inline-block;
+            padding-bottom: 8px;
+            transition: opacity 0.4s ease;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.9);
+        }
+
+        .carousel-wrapper {
+            width: 100%;
+            position: relative;
+            margin-bottom: 60px;
+        }
+        .carousel-container {
+            position: relative;
+            height: 350px;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        .carousel-slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0; left: 0;
+        }
+        .carousel-slide.active {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+        .link-card {
+            background: var(--color-surface);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--color-border);
+            padding: 40px;
+            border-radius: 2px;
+            text-decoration: none;
+            color: var(--color-text);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .link-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 2px;
+            background: var(--color-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .link-card:hover {
+            background: var(--color-surface-light);
+            border-color: rgba(212, 180, 131, 0.3);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+        .link-card:hover::after { transform: scaleX(1); }
+        .card-num {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            color: var(--color-primary);
+            opacity: 0.3;
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+        .card-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            font-weight: 500;
+            margin: 0 0 15px 0;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+            margin: 0 0 30px 0;
+            font-weight: 300;
+            max-width: 500px;
+        }
+        .card-btn {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid var(--color-primary);
+            color: var(--color-primary);
+            padding: 12px 30px;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        .link-card:hover .card-btn {
+            background: var(--color-primary);
+            color: #0c0c0d;
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(22, 22, 26, 0.8);
+            color: var(--color-primary);
+            border: 1px solid var(--color-border);
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            user-select: none;
+            z-index: 10;
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .carousel-btn:hover {
+            background: var(--color-primary);
+            color: #0c0c0d;
+            border-color: var(--color-primary);
+        }
+        .carousel-btn.prev { left: -25px; }
+        .carousel-btn.next { right: -25px; }
+        .carousel-dots {
+            text-align: center;
+            padding-top: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+        .dot {
+            cursor: pointer;
+            height: 4px;
+            width: 20px;
+            background-color: rgba(255,255,255,0.2);
+            display: inline-block;
+            transition: all 0.4s ease;
+        }
+        .dot.active, .dot:hover {
+            background-color: var(--color-primary);
+            width: 30px;
+        }
+
+        /* --- VIDEOS FINALES --- */
+        .video-section {
+            width: 100%;
+            max-width: 1000px;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+            animation: fadeIn 2s ease-in;
+        }
+        .video-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.9);
+        }
+        .video-container {
+            position: relative;
+            border: 1px solid var(--color-primary);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            background: #000;
+            margin-bottom: 60px;
+        }
+        .promo-video { width: 100%; display: block; }
+        .video-desc {
+            margin-top: 15px;
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.9);
+        }
+
+        /* SUPER PREMIUM CARD */
+        .link-card.is-super-premium {
+            background: linear-gradient(135deg, rgba(26,26,30,0.9) 0%, rgba(42,36,25,0.9) 50%, rgba(26,26,30,0.9) 100%);
+            border: 1px solid rgba(212, 180, 131, 0.5);
+            box-shadow: inset 0 0 60px rgba(212, 180, 131, 0.08), 0 0 30px rgba(212, 180, 131, 0.15);
+        }
+        .link-card.is-super-premium::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at center, rgba(212, 180, 131, 0.12) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .link-card.is-super-premium > * { position: relative; z-index: 1; }
+        .link-card.is-super-premium .card-num {
+            color: var(--color-primary-bright);
+            opacity: 0.5;
+            text-shadow: 0 0 20px rgba(212, 180, 131, 0.4);
+        }
+        .link-card.is-super-premium .card-title { text-shadow: 0 0 24px rgba(212, 180, 131, 0.35); }
+        .link-card.is-super-premium .card-btn {
+            background: linear-gradient(135deg, rgba(212, 180, 131, 0.15), rgba(212, 180, 131, 0.05));
+            border-color: var(--color-primary-bright);
+            color: var(--color-primary-bright);
+            text-shadow: 0 0 12px rgba(212, 180, 131, 0.4);
+            padding: 14px 36px;
+            letter-spacing: 3px;
+        }
+        .link-card.is-super-premium .card-btn::before { content: '◆ '; margin-right: 8px; }
+        .link-card.is-super-premium:hover {
+            background: linear-gradient(135deg, rgba(42,36,25,0.95) 0%, rgba(58,50,37,0.95) 50%, rgba(26,26,30,0.95) 100%);
+            border-color: var(--color-primary-bright);
+            box-shadow: inset 0 0 80px rgba(212, 180, 131, 0.12), 0 0 50px rgba(212, 180, 131, 0.25);
+        }
+        .link-card.is-super-premium:hover .card-btn {
+            background: var(--color-primary-bright);
+            color: #0c0c0d;
+            box-shadow: 0 8px 30px rgba(212, 180, 131, 0.5);
+            text-shadow: none;
+        }
+        .card-badge {
+            position: absolute; top: 20px; right: 20px;
+            padding: 6px 14px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-primary-bright));
+            color: #0c0c0d;
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            font-weight: 700;
+            border-radius: 50px;
+            text-transform: uppercase;
+            z-index: 2;
+            box-shadow: 0 4px 15px rgba(212, 180, 131, 0.4);
+            display: flex; align-items: center; gap: 6px;
+        }
+        .card-badge::before { content: '◆'; font-size: 0.55rem; }
+        .card-badge::after { content: '◆'; font-size: 0.55rem; }
+
+        /* SEALED CARD — Capítulo sellado / acceso restringido */
+        .link-card.is-sealed {
+            background: linear-gradient(135deg, rgba(20,20,24,0.92) 0%, rgba(28,28,34,0.92) 50%, rgba(20,20,24,0.92) 100%);
+            border: 1px dashed rgba(212, 180, 131, 0.45);
+            cursor: pointer;
+        }
+        .link-card.is-sealed::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(45deg, transparent 0, transparent 14px, rgba(212,180,131,0.025) 14px, rgba(212,180,131,0.025) 28px);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .link-card.is-sealed > * { position: relative; z-index: 1; }
+        .link-card.is-sealed .card-num {
+            color: var(--color-primary);
+            opacity: 0.35;
+        }
+        .link-card.is-sealed .card-title { color: var(--color-primary-bright); opacity: 0.92; }
+        .link-card.is-sealed .card-desc { font-style: italic; opacity: 0.7; }
+        .link-card.is-sealed .card-btn {
+            background: transparent;
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            cursor: default;
+        }
+        .link-card.is-sealed .card-btn::before { content: '⚿  '; opacity: 0.7; }
+        .link-card.is-sealed:hover {
+            border-color: rgba(212, 180, 131, 0.6);
+            background: linear-gradient(135deg, rgba(26,26,30,0.95) 0%, rgba(36,34,30,0.95) 50%, rgba(26,26,30,0.95) 100%);
+        }
+        .card-lock {
+            position: absolute; top: 20px; right: 20px;
+            width: 28px; height: 28px;
+            display: flex; align-items: center; justify-content: center;
+            border: 1px solid rgba(212, 180, 131, 0.5);
+            border-radius: 50%;
+            color: var(--color-primary);
+            font-size: 0.7rem;
+            z-index: 2;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(4px);
+        }
+
+        /* ============ MODAL ANEXOS OPERATIVOS (PIN + GRID) ============ */
+        .annex-modal-inner {
+            background: linear-gradient(135deg, rgba(22,22,26,0.92) 0%, rgba(12,12,13,0.92) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212,180,131,0.4);
+            border-radius: 6px;
+            max-width: 720px;
+            width: 100%;
+            padding: 50px 40px 40px 40px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.9), inset 0 0 60px rgba(212,180,131,0.04);
+            box-sizing: border-box;
+        }
+        .annex-modal-close {
+            position: absolute; top: 12px; right: 12px;
+            background: rgba(212,180,131,0.15);
+            border: 1px solid rgba(212,180,131,0.5);
+            color: #d4b483;
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: 300;
+            transition: all 0.3s ease;
+            z-index: 5;
+            backdrop-filter: blur(8px);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .annex-modal-close:hover {
+            background: #d4b483;
+            color: #0c0c0d;
+            border-color: #d4b483;
+            transform: rotate(90deg);
+        }
+        .annex-lock-icon {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: #d4b483;
+            opacity: 0.6;
+            margin-bottom: 20px;
+        }
+        .annex-modal-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: #f5f5f5;
+            font-weight: 500;
+            letter-spacing: 2px;
+            margin: 0 0 8px 0;
+        }
+        .annex-modal-subtitle {
+            color: #d4b483;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin: 0 0 30px 0;
+        }
+
+        /* --- Estado PIN --- */
+        .annex-pin-state { display: block; animation: fadeIn 0.5s ease; }
+        .annex-pin-state.hidden { display: none; }
+        .annex-pin-form {
+            width: 100%;
+            max-width: 380px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .annex-pin-input {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid #d4b483;
+            padding: 15px 20px;
+            color: #f5f5f5;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            text-align: center;
+            letter-spacing: 3px;
+            border-radius: 2px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .annex-pin-input:focus {
+            background: rgba(212, 180, 131, 0.05);
+            border-color: #e8cf9e;
+        }
+        .annex-pin-btn {
+            background: transparent;
+            border: 1px solid #d4b483;
+            color: #d4b483;
+            padding: 15px 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.9rem;
+        }
+        .annex-pin-btn:hover {
+            background: #d4b483;
+            color: #0c0c0d;
+            box-shadow: 0 8px 20px rgba(212, 180, 131, 0.3);
+        }
+        .annex-pin-error {
+            color: #a07c7c;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            height: 15px;
+        }
+        .annex-pin-hint {
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 20px;
+            margin-top: 15px;
+        }
+        .annex-pin-hint p {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: #d4b483;
+            font-size: 0.95rem;
+            margin: 0 0 6px 0;
+        }
+        .annex-pin-hint small {
+            color: #9a9a9a;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- Estado Grid de Anexos --- */
+        .annex-grid-state { display: none; animation: fadeIn 0.8s ease; }
+        .annex-grid-state.visible { display: block; }
+        .annex-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin: 20px 0 30px 0;
+        }
+        @media (max-width: 600px) {
+            .annex-grid { grid-template-columns: 1fr; }
+        }
+        .annex-card {
+            background: rgba(22, 22, 26, 0.72);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 24px 20px;
+            border-radius: 2px;
+            text-decoration: none;
+            color: #f5f5f5;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 160px;
+        }
+        .annex-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 2px;
+            background: #d4b483;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        .annex-card:hover {
+            background: rgba(31, 31, 36, 0.95);
+            border-color: rgba(212, 180, 131, 0.3);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            transform: translateY(-3px);
+        }
+        .annex-card:hover::after { transform: scaleX(1); }
+        .annex-card-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: #d4b483;
+            opacity: 0.4;
+            margin-bottom: 6px;
+            line-height: 1;
+        }
+        .annex-card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin: 0 0 8px 0;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .annex-card-desc {
+            font-size: 0.78rem;
+            color: #9a9a9a;
+            font-weight: 300;
+            margin: 0 0 14px 0;
+            line-height: 1.5;
+        }
+        .annex-card-btn {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid #d4b483;
+            color: #d4b483;
+            padding: 8px 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.65rem;
+            transition: all 0.3s ease;
+        }
+        .annex-card:hover .annex-card-btn {
+            background: #d4b483;
+            color: #0c0c0d;
+        }
+        .annex-back-pin {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #9a9a9a;
+            padding: 8px 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        .annex-back-pin:hover {
+            border-color: #d4b483;
+            color: #d4b483;
+        }
+
+        /* ============ LEYENDA DEL ORIGEN DEL NOMBRE ============ */
+        .origin-legend {
+            width: 100%;
+            max-width: 820px;
+            margin: 80px auto 0 auto;
+            padding: 50px 40px 10px 40px;
+            box-sizing: border-box;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        .origin-legend-divider {
+            width: 60px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--color-primary), transparent);
+            margin: 0 auto 30px auto;
+            opacity: 0.6;
+        }
+        .origin-legend-eyebrow {
+            font-family: var(--font-sans);
+            font-size: 0.65rem;
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            opacity: 0.7;
+            margin-bottom: 28px;
+        }
+        .origin-legend-text {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: var(--color-text);
+            margin: 0 0 28px 0;
+            letter-spacing: 0.01em;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.9);
+            transition: opacity 0.4s ease;
+        }
+        .origin-legend-text.is-hidden { display: none; }
+        .origin-legend-text .accent {
+            color: var(--color-primary-bright);
+            font-weight: 500;
+        }
+        .origin-legend-lang-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            margin-top: 22px;
+            flex-wrap: wrap;
+        }
+        .origin-legend-lang-btn {
+            background: transparent;
+            border: 1px solid rgba(212, 180, 131, 0.3);
+            color: var(--color-text-muted);
+            padding: 6px 16px;
+            font-family: var(--font-sans);
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(6px);
+        }
+        .origin-legend-lang-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+        .origin-legend-lang-btn.is-active {
+            background: rgba(212, 180, 131, 0.15);
+            border-color: var(--color-primary-bright);
+            color: var(--color-primary-bright);
+        }
+        .origin-legend-coda {
+            margin-top: 30px;
+            font-family: var(--font-sans);
+            font-size: 0.6rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+            opacity: 0.6;
+        }
+        .origin-legend-coda .sep {
+            color: var(--color-primary);
+            opacity: 0.5;
+            margin: 0 8px;
+        }
+        @media (max-width: 768px) {
+            .origin-legend { padding: 40px 20px 10px 20px; margin-top: 50px; }
+            .origin-legend-text { font-size: 1rem; }
+            .origin-legend-lang-btn { padding: 5px 12px; font-size: 0.55rem; }
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 60px;
+            padding: 30px 20px;
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+            color: var(--color-text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            z-index: 2;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+        }
+        footer strong { color: var(--color-primary); font-weight: 500; }
+        .eco-logo { max-height: 40px; opacity: 0.8; filter: brightness(1.2); }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+        }
+        .shake { animation: shake 0.3s ease-in-out; }
+
+        /* ============ CIERRE CINEMATOGRÁFICO ============ */
+        .closing-overlay{
+            position:fixed; inset:0;
+            z-index:9998;
+            background:radial-gradient(ellipse at center, #0c0c0d 0%, #000 80%);
+            display:none;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+            padding:40px;
+            box-sizing:border-box;
+            opacity:0;
+            transition:opacity 3s ease-in-out;
+            overflow-y:auto;
+        }
+        .closing-overlay.visible{
+            display:flex;
+            opacity:1;
+        }
+        .closing-overlay::before{
+            content:'';
+            position:absolute; inset:0;
+            background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+            opacity:0.18;
+            mix-blend-mode:overlay;
+            pointer-events:none;
+        }
+        .closing-vignette{
+            position:absolute; inset:0;
+            background:radial-gradient(ellipse at center, transparent 0%, transparent 40%, rgba(0,0,0,0.7) 100%);
+            pointer-events:none;
+        }
+        .closing-content{
+            position:relative;
+            z-index:2;
+            max-width:760px;
+            animation:closingRise 4s cubic-bezier(.2,.8,.2,1) both;
+        }
+        @keyframes closingRise{
+            0%   { opacity:0; transform:translateY(40px); }
+            100% { opacity:1; transform:translateY(0); }
+        }
+        .closing-logo{
+            max-width:110px;
+            max-height:110px;
+            object-fit:contain;
+            margin:0 auto 40px;
+            display:block;
+            filter:brightness(1.3) drop-shadow(0 0 30px rgba(212,180,131,0.25));
+            opacity:0;
+            animation:closingLogoIn 6s ease 0.5s both;
+        }
+        @keyframes closingLogoIn{
+            0%   { opacity:0; transform:scale(0.92); filter:blur(12px) brightness(1.3); }
+            60%  { opacity:0.85; }
+            100% { opacity:0.95; transform:scale(1); filter:blur(0) brightness(1.3) drop-shadow(0 0 30px rgba(212,180,131,0.25)); }
+        }
+        .closing-eyebrow{
+            font-family:'Cormorant Garamond', serif;
+            font-size:0.85rem;
+            letter-spacing:0.6em;
+            text-transform:uppercase;
+            color:#d4b483;
+            opacity:0.7;
+            margin-bottom:50px;
+            animation:closingFade 3s ease 2s both;
+        }
+        @keyframes closingFade{
+            from{ opacity:0; } to{ opacity:0.7; }
+        }
+        .closing-numbers{
+            display:flex;
+            justify-content:center;
+            align-items:baseline;
+            gap:30px;
+            margin-bottom:60px;
+            flex-wrap:wrap;
+        }
+        .closing-num{
+            font-family:'Cormorant Garamond', serif;
+            font-size:4.5rem;
+            font-weight:300;
+            color:#f5f5f5;
+            line-height:1;
+            letter-spacing:-0.02em;
+            animation:closingNumIn 2.5s ease both;
+        }
+        .closing-num:nth-child(1){ animation-delay:1.5s; }
+        .closing-num:nth-child(2){ animation-delay:2.2s; }
+        .closing-num:nth-child(3){ animation-delay:2.9s; }
+        @keyframes closingNumIn{
+            from{ opacity:0; transform:translateY(20px); filter:blur(8px); }
+            to  { opacity:1; transform:translateY(0); filter:blur(0); }
+        }
+        .closing-sep{
+            font-family:'Cormorant Garamond', serif;
+            font-size:2rem;
+            font-style:italic;
+            color:#d4b483;
+            opacity:0.4;
+            animation:closingNumIn 2.5s ease 3.6s both;
+        }
+        .closing-line{
+            font-family:'Cormorant Garamond', serif;
+            font-size:1.6rem;
+            font-style:italic;
+            color:#f5f5f5;
+            line-height:1.5;
+            margin-bottom:40px;
+            animation:closingNumIn 3s ease 4s both;
+            letter-spacing:0.02em;
+        }
+        .closing-tag{
+            font-family:'Montserrat', sans-serif;
+            font-size:0.7rem;
+            letter-spacing:0.5em;
+            text-transform:uppercase;
+            color:#9a9a9a;
+            margin-bottom:80px;
+            animation:closingNumIn 3s ease 4.8s both;
+        }
+        .closing-tag strong{ color:#d4b483; font-weight:500; }
+        .closing-sign{
+            font-family:'Cormorant Garamond', serif;
+            font-style:italic;
+            font-size:1rem;
+            color:#d4b483;
+            opacity:0.7;
+            animation:closingNumIn 3s ease 6.2s both;
+        }
+        /* === LISTA DE DOCUMENTACIÓN CLAVE (nuevo cierre) === */
+        .closing-docs-list{
+            max-width:720px;
+            margin:0 auto 50px auto;
+            text-align:left;
+            width:100%;
+        }
+        .closing-doc{
+            display:flex;
+            gap:22px;
+            padding:14px 0;
+            border-bottom:1px solid rgba(212,180,131,0.12);
+            opacity:0;
+            animation:closingDocIn 2s ease both;
+        }
+        .closing-doc:last-child{ border-bottom:none; }
+        .closing-doc:nth-child(1){ animation-delay:2s; }
+        .closing-doc:nth-child(2){ animation-delay:2.6s; }
+        .closing-doc:nth-child(3){ animation-delay:3.2s; }
+        .closing-doc:nth-child(4){ animation-delay:3.8s; }
+        .closing-doc:nth-child(5){ animation-delay:4.4s; }
+        @keyframes closingDocIn{
+            from { opacity:0; transform:translateY(15px); filter:blur(6px); }
+            to   { opacity:1; transform:translateY(0); filter:blur(0); }
+        }
+        .closing-doc-num{
+            font-family:'Cormorant Garamond', serif;
+            font-size:2rem;
+            font-weight:300;
+            color:#d4b483;
+            opacity:0.6;
+            flex-shrink:0;
+            width:36px;
+            text-align:right;
+            line-height:1.2;
+            font-style:italic;
+        }
+        .closing-doc-body{ flex:1; min-width:0; }
+        .closing-doc-title{
+            font-family:'Cormorant Garamond', serif;
+            font-size:1.15rem;
+            font-weight:500;
+            color:#f5f5f5;
+            margin-bottom:6px;
+            letter-spacing:0.02em;
+            line-height:1.3;
+        }
+        .closing-doc-desc{
+            font-family:'Montserrat', sans-serif;
+            font-size:0.72rem;
+            font-weight:300;
+            color:#9a9a9a;
+            line-height:1.6;
+            letter-spacing:0.01em;
+        }
+        .closing-tag{
+            animation:closingNumIn 3s ease 5.4s both !important;
+        }
+        .closing-eyebrow{
+            margin-bottom:30px !important;
+        }
+        @media (max-width:600px){
+            .closing-doc{ gap:14px; padding:12px 0; }
+            .closing-doc-num{ font-size:1.5rem; width:28px; }
+            .closing-doc-title{ font-size:1rem; }
+            .closing-doc-desc{ font-size:0.68rem; }
+        }
+        .closing-close-btn{
+            position:absolute;
+            top:30px; right:30px;
+            background:transparent;
+            border:1px solid rgba(212,180,131,0.3);
+            color:#d4b483;
+            padding:8px 20px;
+            font-family:'Montserrat', sans-serif;
+            font-size:0.65rem;
+            text-transform:uppercase;
+            letter-spacing:0.3em;
+            cursor:pointer;
+            border-radius:50px;
+            transition:all 0.3s ease;
+            z-index:5;
+            backdrop-filter:blur(8px);
+        }
+        .closing-close-btn:hover{
+            background:rgba(212,180,131,0.15);
+            border-color:rgba(212,180,131,0.6);
+        }
+        @media (max-width:768px){
+            .closing-num{ font-size:3rem; }
+            .closing-line{ font-size:1.2rem; }
+            .closing-numbers{ gap:18px; }
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .lock-title { font-size: 2rem; }
+            .card-title { font-size: 1.8rem; }
+            .hub-title { font-size: 1.5rem; }
+            .carousel-btn.prev { left: 10px; }
+            .carousel-btn.next { right: 10px; }
+            .carousel-container { height: 400px; }
+            .video-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- FONDO CINEMATOGRÁFICO DE LOS MANGLARES -->
+    <div class="bg-video-wrapper" id="bgVideoWrapper">
+        <video class="bg-manglar-video" id="manglarVideo" autoplay loop muted playsinline>
+            <source src="video/porcaday1.mp4" type="video/mp4">
+        </video>
+        <div class="bg-manglar-vignette"></div>
+    </div>
+
+    <!-- AUDIO GLOBAL DE FONDO -->
+    <audio id="backgroundAudio" loop preload="auto">
+        <source src="WHEEL%20OF%20TIME.MP3" type="audio/mpeg">
+    </audio>
+
+    <div class="container">
+        <div class="top-bar">
+            <button class="mute-btn" onclick="toggleMute()" id="muteBtn">🔊 Mute</button>
+            <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">🌐 English</button>
+            <button class="mute-btn" onclick="logoutToLock()" id="logoutBtn" style="display:none;" data-es="⏏ Menú" data-en="⏏ Menu">⏏ Menú</button>
+        </div>
+
+        <!-- LOCK SCREEN -->
+        <div class="lock-screen" id="lockScreen">
+            <div class="logo-glow">
+                <img src="images/TAKYMA.PNG" alt="Takyma Logo" class="main-logo" onerror="this.style.display='none';">
+            </div>
+            <h1 class="lock-title" data-es="Takyma" data-en="Takyma">Takyma</h1>
+            <p class="lock-subtitle" data-es="Investment Pioneer" data-en="Investment Pioneer">Investment Pioneer</p>
+            <p style="font-family: var(--font-sans); font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--color-text-muted); margin: -20px 0 30px 0; opacity: 0.65;" data-es="Presentación dedicada · Activa Panamá" data-en="Dedicated presentation · Activa Panama">Presentación dedicada · Activa Panamá</p>
+            
+            <form class="access-form" onsubmit="checkPassword(event)">
+                <input type="password" class="pass-input" id="passInput" placeholder="CLAVE DE ACCESO / ACCESS KEY" required>
+                <button type="submit" class="submit-btn" data-es="ENTRAR" data-en="ENTER">ENTRAR</button>
+            </form>
+            <div class="error-text" id="errorMsg"></div>
+        </div>
+
+        <!-- DASHBOARD (Hidden by default) -->
+        <div class="dashboard" id="dashboard">
+            <img src="images/TAKYMA.PNG" alt="Takyma Logo" class="dashboard-logo" onerror="this.style.display='none';">
+            
+            <header>
+                <h1 data-es="Ecosistema La Porcada" data-en="La Porcada Ecosystem">Ecosistema La Porcada</h1>
+                <h2 data-es="Documentos Corporativos" data-en="Corporate Documents">Documentos Corporativos</h2>
+            </header>
+
+            <!-- HUB DE NAVEGACIÓN -->
+            <div class="hub-view" id="hubView">
+                <div class="hub-grid">
+                    <div class="hub-card" onclick="openCategory('marketing')">
+                        <div class="hub-roman">I</div>
+                        <h3 class="hub-title" data-es="Plan de Marketing" data-en="Marketing Plan">Plan de Marketing</h3>
+                        <p class="hub-desc" data-es="Visión, producto, posicionamiento, estrategia de marca, movilidad sostenible, aduana privada para jets y puente icono." data-en="Vision, product, positioning, brand strategy, sustainable mobility, private customs for jets and iconic bridge.">Visión, producto, posicionamiento, estrategia de marca, movilidad sostenible, aduana privada para jets y puente icono.</p>
+                        <span class="hub-btn" data-es="ABRIR BLOQUE" data-en="OPEN SECTION">ABRIR BLOQUE</span>
+                    </div>
+                    <div class="hub-card" onclick="openCategory('mercado')">
+                        <div class="hub-roman">II</div>
+                        <h3 class="hub-title" data-es="Estudio de Mercado" data-en="Market Study">Estudio de Mercado</h3>
+                        <p class="hub-desc" data-es="Competencia directa en Panamá: comparativas frente a Islas Secas, Plan Perlas, Isla Palenque y los 17 proyectos de Chiriquí. Senderos y entorno natural de la isla." data-en="Direct competition in Panama: comparisons vs Islas Secas, Pearl Islands Plan, Isla Palenque and the 17 Chiriquí projects. Trails and natural environment of the island.">Competencia directa en Panamá: comparativas frente a Islas Secas, Plan Perlas, Isla Palenque y los 17 proyectos de Chiriquí. Senderos y entorno natural de la isla.</p>
+                        <span class="hub-btn" data-es="ABRIR BLOQUE" data-en="OPEN SECTION">ABRIR BLOQUE</span>
+                    </div>
+                    <div class="hub-card" onclick="openCategory('proveedores')">
+                        <div class="hub-roman">III</div>
+                        <h3 class="hub-title" data-es="Proveedores Especiales" data-en="Special Providers">Proveedores Especiales</h3>
+                        <p class="hub-desc" data-es="Quién explotará el complejo (Aman), las compañías del desarrollo (Shima Investment Special y Takyma · Contractante) y el proveedor local dedicado: Activa Panamá." data-en="Who will operate the complex (Aman), the development companies (Shima Investment Special and Takyma · Contracting Party) and the dedicated local provider: Activa Panama.">Quién explotará el complejo (Aman), las compañías del desarrollo (Shima Investment Special y Takyma · Contractante) y el proveedor local dedicado: Activa Panamá.</p>
+                        <span class="hub-btn" data-es="ABRIR BLOQUE" data-en="OPEN SECTION">ABRIR BLOQUE</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VISTA DEL CARRUSEL -->
+            <div class="carousel-view" id="carouselView">
+                <button class="back-btn" onclick="backToHub()" data-es="← Volver al Menú" data-en="← Back to Menu">← Volver al Menú</button>
+                
+                <div class="category-header">
+                    <div class="category-title" id="categoryTitle"></div>
+                </div>
+
+                <div class="carousel-wrapper">
+                    <div class="carousel-container" id="carouselContainer">
+                        
+                        <!-- BLOQUE 1: MARKETING (00, 01, 02, 05, 22) -->
+                        <div class="carousel-slide" data-cat="marketing">
+                            <a href="https://maralagoporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                                <div class="card-num">00</div>
+                                <h3 class="card-title" data-es="Punto Cero" data-en="Point Zero">Punto Cero</h3>
+                                <p class="card-desc" data-es="Nuestra meta: Crear el Mar a Lago del Siglo XXI." data-en="Our goal: To create the 21st Century Mar-a-Lago.">Nuestra meta: Crear el Mar a Lago del Siglo XXI.</p>
+                                <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                            </a>
+                        </div>
+                        <div class="carousel-slide" data-cat="marketing">
+                            <a href="https://marketingporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                                <div class="card-num">01</div>
+                                <h3 class="card-title" data-es="Marketing" data-en="Marketing">Marketing</h3>
+                                <p class="card-desc" data-es="Estrategia, visión y posicionamiento de marca del proyecto." data-en="Project strategy, vision and brand positioning.">Estrategia, visión y posicionamiento de marca del proyecto.</p>
+                                <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                            </a>
+                        </div>
+                        <div class="carousel-slide" data-cat="marketing">
+                            <a href="https://competenciainternacional.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                                <div class="card-num">02</div>
+                                <h3 class="card-title" data-es="Competencia" data-en="Competition">Competencia</h3>
+                                <p class="card-desc" data-es="Análisis de mercado, entorno regional y benchmarking." data-en="Market analysis, regional environment and benchmarking.">Análisis de mercado, entorno regional y benchmarking.</p>
+                                <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                            </a>
+                        </div>
+                        <div class="carousel-slide" data-cat="marketing">
+                            <a href="https://villazeroporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                                <div class="card-num">05</div>
+                                <h3 class="card-title" data-es="Villa Cero" data-en="Villa Zero">Villa Cero</h3>
+                                <p class="card-desc" data-es="Presentación de la villa que vamos a comercializar." data-en="Presentation of the villa to be commercialized.">Presentación de la villa que vamos a comercializar.</p>
+                                <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                            </a>
+                        </div>
+                        <div class="carousel-slide" data-cat="marketing">
+                            <a href="https://movilidadporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                                <div class="card-num">22</div>
+                                <h3 class="card-title" data-es="Movilidad La Porcada" data-en="La Porcada Mobility">Movilidad La Porcada</h3>
+                                <p class="card-desc" data-es="Capítulo 22 · Movilidad & conectividad: cinco capas para 760 huéspedes en 437 ha — boardwalks elevados, flota 100% eléctrica interna, 12 Land Cruiser VIP solo para entrada y salida, marina no-wake, pista Code B y hípica ampliada a 30 caballos." data-en="Chapter 22 · Mobility & connectivity: five layers for 760 guests across 437 ha — elevated boardwalks, 100% internal electric fleet, 12 VIP Land Cruisers for entry and exit only, no-wake marina, Code B strip and equestrian expansion to 30 horses.">Capítulo 22 · Movilidad & conectividad: cinco capas para 760 huéspedes en 437 ha — boardwalks elevados, flota 100% eléctrica interna, 12 Land Cruiser VIP solo para entrada y salida, marina no-wake, pista Code B y hípica ampliada a 30 caballos.</p>
+                                <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                            </a>
+                        </div>
+                        <div class="carousel-slide" data-cat="marketing">
+                            <a href="https://aduanaporcada.netlify.app/" class="link-card is-super-premium" target="_blank" rel="noopener noreferrer">
+                                <div class="card-badge" data-es="Operativo" data-en="Operational">Operativo</div>
+                                <div class="card-num">28</div>
+                                <h3 class="card-title" data-es="Aduana · Jets Privados" data-en="Customs · Private Jets">Aduana · Jets Privados</h3>
+                                <p class="card-desc" data-es="Capítulo 28 · Aduana Privada & Recepción Internacional de Jets: itinerarios operativos completos para la recepción de jets privados provenientes de San Petersburgo y Hong Kong, incluyendo diseño, habilitación y operación de un puesto fronterizo auxiliar en la isla. Tres modelos operativos (Hub+Heli · Ad-hoc · Aeródromo Internacional Privado), Decreto Ejecutivo 4/2025 + AAC + ANA, cronograma 24 meses y 15 contactos institucionales." data-en="Chapter 28 · Private Customs & International Private Jet Reception: complete operational itineraries for the reception of private jets from Saint Petersburg and Hong Kong, including design, enablement and operation of an auxiliary border post on the island. Three operational models (Hub+Heli · Ad-hoc · Private International Aerodrome), Executive Decree 4/2025 + AAC + ANA, 24-month timeline and 15 institutional contacts.">Capítulo 28 · Aduana Privada & Recepción Internacional de Jets: itinerarios operativos completos para la recepción de jets privados provenientes de San Petersburgo y Hong Kong, incluyendo diseño, habilitación y operación de un puesto fronterizo auxiliar en la isla. Tres modelos operativos (Hub+Heli · Ad-hoc · Aeródromo Internacional Privado), Decreto Ejecutivo 4/2025 + AAC + ANA, cronograma 24 meses y 15 contactos institucionales.</p>
+                                <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                            </a>
+                        </div>
+                        <div class="carousel-slide" data-cat="marketing">
+                            <a href="https://puenteporcada.netlify.app/" class="link-card is-super-premium" target="_blank" rel="noopener noreferrer">
+                                <div class="card-badge" data-es="Manifiesto" data-en="Manifesto">Manifiesto</div>
+                                <div class="card-num">29</div>
+                                <h3 class="card-title" data-es="Puente La Porcada" data-en="La Porcada Bridge">Puente La Porcada</h3>
+                                <p class="card-desc" data-es="Capítulo 29 · Puente atirantado peatonal de 152 m de luz única sobre el río de la isla. Sin pilas en agua. Sistema triángulo mágico (CLT + acero galvanizado + epoxy), aisladores LRB para sismo Mw 9, freeboard +6 m sobre MSL. Inspirado en Lo Passador de Sant Jaume d'Enveja (Delta del Ebro, 2011). Tarjeta de presentación del resort al mundo — el icono arquitectónico que define La Porcada en el imaginario del lujo global del siglo XXI. Galería visual con 4 vistas, manifiestos bilingües, referencias arquitectónicas y presupuesto orientativo $1.8M-$3.0M." data-en="Chapter 29 · Cable-stayed pedestrian bridge of 152 m single span over the island's river. No piers in water. Magic triangle system (CLT + galvanized steel + epoxy), LRB isolators for Mw 9 earthquake, +6 m freeboard above MSL. Inspired by Lo Passador of Sant Jaume d'Enveja (Ebro Delta, 2011). The resort's calling card to the world — the architectural icon that defines La Porcada in the imagination of global luxury in the 21st century. Visual gallery with 4 views, bilingual manifestos, architectural references and indicative budget $1.8M-$3.0M.">Capítulo 29 · Puente atirantado peatonal de 152 m de luz única sobre el río de la isla. Sin pilas en agua. Sistema triángulo mágico (CLT + acero galvanizado + epoxy), aisladores LRB para sismo Mw 9, freeboard +6 m sobre MSL. Inspirado en Lo Passador de Sant Jaume d'Enveja (Delta del Ebro, 2011). Tarjeta de presentación del resort al mundo — el icono arquitectónico que define La Porcada en el imaginario del lujo global del siglo XXI. Galería visual con 4 vistas, manifiestos bilingües, referencias arquitectónicas y presupuesto orientativo $1.8M-$3.0M.</p>
+                                <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                            </a>
+                        </div>
+                        <div class="carousel-slide" data-cat="marketing">
+                            <a href="https://tarimaporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                                <div class="card-num">30</div>
+                                <h3 class="card-title" data-es="Tarima La Porcada" data-en="La Porcada Boardwalk">Tarima La Porcada</h3>
+                                <p class="card-desc" data-es="Capítulo 30 · Plataforma de madera elevada sobre el manglar — paseo peatonal y escénico que conecta las villas con la playa. Tarima sostenible en CLT tratado, sin impacto sobre el ecosistema." data-en="Chapter 30 · Elevated wooden platform over the mangrove — pedestrian and scenic walkway connecting the villas to the beach. Sustainable CLT boardwalk, with no impact on the ecosystem.">Capítulo 30 · Plataforma de madera elevada sobre el manglar — paseo peatonal y escénico que conecta las villas con la playa. Tarima sostenible en CLT tratado, sin impacto sobre el ecosistema.</p>
+                                <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                            </a>
+                        </div>
+
+                        <!-- BLOQUE 3: MERCADO · Competencia directa en Panamá (11, 12, 27, 17, 18) -->
+                        <div class="carousel-slide" data-cat="mercado">
+                            <a href="https://porcadaislassecas.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                                <div class="card-num">11</div>
+                                <h3 class="card-title" data-es="vs Islas Secas" data-en="vs Islas Secas">vs Islas Secas</h3>
+                                <p class="card-desc" data-es="Análisis agresivo del resort Islas Secas (#1 Isla Condé Nast 2026) geográficamente enfrente de La Porcada." data-en="Aggressive analysis of Islas Secas resort (#1 Island Condé Nast 2026) geographically in front of La Porcada.">Análisis agresivo del resort Islas Secas (#1 Isla Condé Nast 2026) geográficamente enfrente de La Porcada.</p>
+                                <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                            </a>
+                        </div>
+                        <div class="carousel-slide" data-cat="mercado">
+                            <a href="https://porcada-vs-perlas.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                                <div class="card-num">12</div>
+                                <h3 class="card-title" data-es="vs Plan Perlas" data-en="vs Pearl Islands Plan">vs Plan Perlas</h3>
+                                <p class="card-desc" data-es="Análisis comparativo del Ecoresort La Porcada frente al Plan Maestro Regional de Las Perlas." data-en="Comparative analysis of La Porcada Ecoresort vs the Pearl Islands Regional Master Plan.">Análisis comparativo del Ecoresort La Porcada frente al Plan Maestro Regional de Las Perlas.</p>
+                                <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                            </a>
+                        </div>
+                        <div class="carousel-slide" data-cat="mercado">
+                            <a href="https://palenquevsporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                                <div class="card-num">27</div>
+                                <h3 class="card-title" data-es="vs Isla Palenque" data-en="vs Isla Palenque">vs Isla Palenque</h3>
+                                <p class="card-desc" data-es="Capítulo 27 · Comparativa frente a Isla Palenque, el eco-resort vecino del Golfo de Chiriquí — 8 casitas en 400 acres operadas por Cayuga Collection. Frente a La Porcada: 437 ha con Aman único, Denniston, 50 Beach Houses a USD 25M y Oasis desde USD 200M. ADR estimado USD 35.000/noche. Nota: La Porcada contará además con 50 villas sobre el mar — posible mitad sumergida — un producto sin comparable en Isla Palenque." data-en="Chapter 27 · Comparison vs Isla Palenque, the neighboring eco-resort of the Gulf of Chiriquí — 8 casitas on 400 acres operated by Cayuga Collection. Vs La Porcada: 437-ha island with single Aman, Denniston, 50 Beach Houses at USD 25M and Oasis from USD 200M. Estimated ADR USD 35,000/night. Note: La Porcada will additionally feature 50 over-water villas — possibly half-submerged — a product with no comparable in Isla Palenque.">Capítulo 27 · Comparativa frente a Isla Palenque, el eco-resort vecino del Golfo de Chiriquí — 8 casitas en 400 acres operadas por Cayuga Collection. Frente a La Porcada: 437 ha con Aman único, Denniston, 50 Beach Houses a USD 25M y Oasis desde USD 200M. ADR estimado USD 35.000/noche. Nota: La Porcada contará además con 50 villas sobre el mar — posible mitad sumergida — un producto sin comparable en Isla Palenque.</p>
+                                <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                            </a>
+                        </div>
+                        <div class="carousel-slide" data-cat="mercado">
+                            <a href="https://proyectoschiriqui26.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                                <div class="card-num">17</div>
+                                <h3 class="card-title" data-es="Comparativa Chiriquí" data-en="Chiriquí Benchmark">Comparativa Chiriquí</h3>
+                                <p class="card-desc" data-es="Capítulo 14: Comparativa del Ecoresort La Porcada frente a los 17 principales proyectos e infraestructuras en ejecución en la Provincia de Chiriquí." data-en="Chapter 14: Benchmark of La Porcada Ecoresort against the 17 main projects and infrastructures underway in the Province of Chiriquí.">Capítulo 14: Comparativa del Ecoresort La Porcada frente a los 17 principales proyectos e infraestructuras en ejecución en la Provincia de Chiriquí.</p>
+                                <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                            </a>
+                        </div>
+                        <div class="carousel-slide" data-cat="mercado">
+                            <a href="https://senderosporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                                <div class="card-num">18</div>
+                                <h3 class="card-title" data-es="Senderos La Porcada" data-en="La Porcada Trails">Senderos La Porcada</h3>
+                                <p class="card-desc" data-es="Cuaderno de excursiones del entorno natural de La Porcada. Recorrido visual por los senderos y el ecosistema de la isla." data-en="Field notebook of La Porcada's natural environment. Visual journey through the trails and island ecosystem.">Cuaderno de excursiones del entorno natural de La Porcada. Recorrido visual por los senderos y el ecosistema de la isla.</p>
+                                <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                            </a>
+                        </div>
+
+                        <!-- BLOQUE 4: PROVEEDORES · Reordenado para Activa Panamá (13 Aman · 15 Shima · 16 Takyma · 14 Activa) -->
+                        <div class="carousel-slide" data-cat="proveedores">
+                            <a href="https://amanporcada.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                                <div class="card-num">13</div>
+                                <h3 class="card-title" data-es="Aman Resorts · Explotador" data-en="Aman Resorts · Operator">Aman Resorts · Explotador</h3>
+                                <p class="card-desc" data-es="Quién explotará el complejo hotelero de la isla: por qué Aman Resorts debe ser el operador del EcoResort La Porcada — la marca que define el lujo silencioso del siglo XXI." data-en="Who will operate the island's hotel complex: why Aman Resorts should be the operator of EcoResort La Porcada — the brand that defines the silent luxury of the 21st century.">Quién explotará el complejo hotelero de la isla: por qué Aman Resorts debe ser el operador del EcoResort La Porcada — la marca que define el lujo silencioso del siglo XXI.</p>
+                                <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                            </a>
+                        </div>
+                        <div class="carousel-slide" data-cat="proveedores">
+                            <a href="https://shimawebnew.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                                <div class="card-num">15</div>
+                                <h3 class="card-title" data-es="Shima Investment Special" data-en="Shima Investment Special">Shima Investment Special</h3>
+                                <p class="card-desc" data-es="Constructora del Grupo en Panamá. Aportan el sistema estructural CLT, acero galvanizado y epoxy con máxima agilidad fiscal. Compañía del desarrollo del proyecto y socio de Activa Panamá en la ejecución material de La Porcada." data-en="Construction arm of the Group in Panama. Supplying CLT structural system, galvanized steel, and epoxy with maximum tax agility. Project development company and partner of Activa Panama in the material execution of La Porcada.">Constructora del Grupo en Panamá. Aportan el sistema estructural CLT, acero galvanizado y epoxy con máxima agilidad fiscal. Compañía del desarrollo del proyecto y socio de Activa Panamá en la ejecución material de La Porcada.</p>
+                                <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                            </a>
+                        </div>
+                        <div class="carousel-slide" data-cat="proveedores">
+                            <a href="https://webtakinves.netlify.app/" class="link-card" target="_blank" rel="noopener noreferrer">
+                                <div class="card-num">16</div>
+                                <h3 class="card-title" data-es="Takyma · Contractante" data-en="Takyma · Contracting Party">Takyma · Contractante</h3>
+                                <p class="card-desc" data-es="Takyma Investment Pioneer, contractante con Activa Panamá. Estructura el capital norteamericano con beneficios fiscales. Sin estrategia de salida: los inversores somos los desarrolladores de nuestro propio legado." data-en="Takyma Investment Pioneer, contracting party with Activa Panama. Structures US capital with tax benefits. No exit strategy: the investors are the developers of our own legacy.">Takyma Investment Pioneer, contractante con Activa Panamá. Estructura el capital norteamericano con beneficios fiscales. Sin estrategia de salida: los inversores somos los desarrolladores de nuestro propio legado.</p>
+                                <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                            </a>
+                        </div>
+                        <div class="carousel-slide" data-cat="proveedores">
+                            <a href="https://activapanama.netlify.app/" class="link-card is-super-premium" target="_blank" rel="noopener noreferrer">
+                                <div class="card-badge" data-es="Proveedor Dedicado" data-en="Dedicated Provider">Proveedor Dedicado</div>
+                                <div class="card-num">14</div>
+                                <h3 class="card-title" data-es="Activa Panamá" data-en="Activa Panama">Activa Panamá</h3>
+                                <p class="card-desc" data-es="Proveedor local panameño · Socio operativo de Takyma Investment Pioneer (contractante) y Shima Investment Special (constructora del grupo) en el desarrollo del EcoResort La Porcada. Licencias, permisología e ingeniería local panameña. Supervisión de Denniston y control total del proyecto por Grupo Capitol." data-en="Panamanian local provider · Operating partner of Takyma Investment Pioneer (contracting party) and Shima Investment Special (group's construction arm) in the development of EcoResort La Porcada. Licenses, permits and Panamanian local engineering. Supervised by Denniston with total project control by Grupo Capitol.">Proveedor local panameño · Socio operativo de Takyma Investment Pioneer (contractante) y Shima Investment Special (constructora del grupo) en el desarrollo del EcoResort La Porcada. Licencias, permisología e ingeniería local panameña. Supervisión de Denniston y control total del proyecto por Grupo Capitol.</p>
+                                <span class="card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                            </a>
+                        </div>
+
+
+
+
+                        <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+                        <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
+                    </div>
+
+                    <div class="carousel-dots" id="carouselDots"></div>
+                </div>
+            </div>
+
+            <!-- ============ CIERRE CINEMATOGRÁFICO ============ -->
+            <div class="closing-overlay" id="closingOverlay">
+                <div class="closing-vignette"></div>
+                <button class="closing-close-btn" onclick="closeClosingOverlay()" data-es="× Cerrar" data-en="× Close">× Cerrar</button>
+                <div class="closing-content">
+                    <img src="images/ECO.PNG" alt="EcoResort La Porcada" class="closing-logo" onerror="this.style.display='none';">
+                    <div class="closing-eyebrow" data-es="Documentación clave · Activa Panamá" data-en="Key Documentation · Activa Panama">Documentación clave · Activa Panamá</div>
+
+                    <div class="closing-docs-list">
+                        <div class="closing-doc">
+                            <div class="closing-doc-num">I</div>
+                            <div class="closing-doc-body">
+                                <div class="closing-doc-title" data-es="Executive Summary" data-en="Executive Summary">Executive Summary</div>
+                                <div class="closing-doc-desc" data-es="Resumen ejecutivo del proyecto · 2-3 páginas · Visión del activo, ubicación estratégica en Panamá, baja densidad de desarrollo (5%) y concepto «Mar-a-Lago del Siglo XXI» enfocado en Family Offices." data-en="Project executive summary · 2-3 pages · Asset vision, strategic location in Panama, low development density (5%) and «21st Century Mar-a-Lago» concept focused on Family Offices.">Resumen ejecutivo del proyecto · 2-3 páginas · Visión del activo, ubicación estratégica en Panamá, baja densidad de desarrollo (5%) y concepto «Mar-a-Lago del Siglo XXI» enfocado en Family Offices.</div>
+                            </div>
+                        </div>
+                        <div class="closing-doc">
+                            <div class="closing-doc-num">II</div>
+                            <div class="closing-doc-body">
+                                <div class="closing-doc-title" data-es="Master Plan Conceptual y Ambiental" data-en="Conceptual & Environmental Master Plan">Master Plan Conceptual y Ambiental</div>
+                                <div class="closing-doc-desc" data-es="Planos y renders preliminares: 100 suites, 50 overwater villas, 50 coastal villas, 8 mansiones, dos marinas y área de bienestar — respeto por el entorno natural y los manglares." data-en="Preliminary plans and renders: 100 suites, 50 overwater villas, 50 coastal villas, 8 mansions, two marinas and wellness area — respect for the natural environment and mangroves.">Planos y renders preliminares: 100 suites, 50 overwater villas, 50 coastal villas, 8 mansiones, dos marinas y área de bienestar — respeto por el entorno natural y los manglares.</div>
+                            </div>
+                        </div>
+                        <div class="closing-doc">
+                            <div class="closing-doc-num">III</div>
+                            <div class="closing-doc-body">
+                                <div class="closing-doc-title" data-es="Estudio de Infraestructura y Soberanía Logística" data-en="Infrastructure & Logistics Sovereignty Study">Estudio de Infraestructura y Soberanía Logística</div>
+                                <div class="closing-doc-desc" data-es="Documentación técnica que certifique la viabilidad operativa de la pista de aterrizaje privada, los permisos de aduana e inmigración in-situ, y la capacidad de las marinas para superyates." data-en="Technical documentation certifying operational viability of the private landing strip, on-site customs and immigration permits, and marina capacity for superyachts.">Documentación técnica que certifique la viabilidad operativa de la pista de aterrizaje privada, los permisos de aduana e inmigración in-situ, y la capacidad de las marinas para superyates.</div>
+                            </div>
+                        </div>
+                        <div class="closing-doc">
+                            <div class="closing-doc-num">IV</div>
+                            <div class="closing-doc-body">
+                                <div class="closing-doc-title" data-es="Estructura Financiera y Modelo de Negocio" data-en="Financial Structure & Business Model">Estructura Financiera y Modelo de Negocio</div>
+                                <div class="closing-doc-desc" data-es="Adelanto de la proyección económica, modelo de membresías (Club Executives) con sus niveles y sólida mitigación de riesgo — recompra de membresías al valor nominal con descuento del 5% anual y suelo de liquidez de $150k USD." data-en="Preview of the economic projection, membership model (Club Executives) with its tiers and solid risk mitigation — membership repurchase at nominal value with 5% annual discount and $150k USD liquidity floor.">Adelanto de la proyección económica, modelo de membresías (Club Executives) con sus niveles y sólida mitigación de riesgo — recompra de membresías al valor nominal con descuento del 5% anual y suelo de liquidez de $150k USD.</div>
+                            </div>
+                        </div>
+                        <div class="closing-doc">
+                            <div class="closing-doc-num">V</div>
+                            <div class="closing-doc-body">
+                                <div class="closing-doc-title" data-es="Perfil de la Propiedad y Derechos de Suelo · Legal &amp; Land Title" data-en="Property Profile & Land Rights · Legal & Land Title">Perfil de la Propiedad y Derechos de Suelo · Legal &amp; Land Title</div>
+                                <div class="closing-doc-desc" data-es="Certificación jurídica de la titularidad o los derechos sobre los terrenos de la isla, y su compatibilidad con inversiones extranjeras y desarrollos turísticos de alta gama." data-en="Legal certification of title or rights over the island's land, and its compatibility with foreign investment and high-end tourism developments.">Certificación jurídica de la titularidad o los derechos sobre los terrenos de la isla, y su compatibilidad con inversiones extranjeras y desarrollos turísticos de alta gama.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="closing-tag" data-es="Primera fase de aproximación · <strong>Aman Resorts / ComoGrup (Cristina Ong)</strong>" data-en="First phase of approach · <strong>Aman Resorts / ComoGrup (Cristina Ong)</strong>">Primera fase de aproximación · <strong>Aman Resorts / ComoGrup (Cristina Ong)</strong></div>
+                    <div class="closing-sign" data-es="« Lo que no se enseña existe. Solo se reserva para quien firma. »" data-en="« What is not shown exists. It is reserved for those who sign. »">« Lo que no se enseña existe. Solo se reserva para quien firma. »</div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN DE VIDEOS FINALES EN PRIMER PLANO -->
+            <div class="video-section">
+                <h2 class="video-title" data-es="La Visión en Imagen" data-en="The Vision in Images">La Visión en Imagen</h2>
+                <div class="video-container">
+                    <video class="promo-video" autoplay loop muted playsinline>
+                        <source src="video/NEWPORCADA.MP4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <p class="video-desc" data-es="Serenidad, confidencialidad y naturaleza casada con el lujo. Una experiencia visual del futuro del Pacífico." data-en="Serenity, confidentiality, and nature paired with luxury. A visual experience of the future of the Pacific.">Serenidad, confidencialidad y naturaleza casada con el lujo. Una experiencia visual del futuro del Pacífico.</p>
+
+                <h2 class="video-title" data-es="La Porcada en la Realidad" data-en="La Porcada in Reality">La Porcada en la Realidad</h2>
+                <div class="video-container">
+                    <video class="promo-video" autoplay loop muted playsinline>
+                        <source src="video/REALPORCADA.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <p class="video-desc" data-es="Un vistazo aéreo y real de la joya del Pacífico panameño." data-en="A real and aerial glimpse of the jewel of the Panamanian Pacific.">Un vistazo aéreo y real de la joya del Pacífico panameño.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ LEYENDA · ORIGEN DEL NOMBRE «LA PORCADA» ============ -->
+    <section class="origin-legend" id="originLegend">
+        <div class="origin-legend-divider"></div>
+        <div class="origin-legend-eyebrow" data-es="Del Origen del Nombre" data-en="On the Origin of the Name" data-ru="О происхождении названия">Del Origen del Nombre</div>
+
+        <p class="origin-legend-text origin-legend-text--es is-active" data-lang="es">
+            «Sin prueba documental que señale a un único culpable, la historia apunta al mismo sospechoso de siempre: la <span class="accent">logística náutica de la conquista</span>, donde las quillas de <span class="accent">Francisco Pizarro</span> y <span class="accent">Gaspar de Espinosa</span> convirtieron las islas del Golfo de Chiriquí en despensas vivas para la corona.»
+        </p>
+        <p class="origin-legend-text origin-legend-text--en is-hidden" data-lang="en">
+            “Without documentary evidence pointing to a single culprit, history points to the usual suspect: the <span class="accent">nautical logistics of the Conquest</span>, where the keels of <span class="accent">Francisco Pizarro</span> and <span class="accent">Gaspar de Espinosa</span> transformed the islands of the Gulf of Chiriquí into living pantries for the Crown.”
+        </p>
+        <p class="origin-legend-text origin-legend-text--ru is-hidden" data-lang="ru">
+            «При отсутствии документальных доказательств, указывающих на одного виновного, история указывает на всё того же главного подозреваемого — <span class="accent">морскую логистику Конкисты</span>, в которой кили кораблей <span class="accent">Франсиско Писарро</span> и <span class="accent">Гаспара де Эспиносы</span> превратили острова залива Чирики в живые продовольственные склады для испанской короны.»
+        </p>
+
+        <div class="origin-legend-lang-row" role="tablist" aria-label="Idioma de la leyenda">
+            <button class="origin-legend-lang-btn is-active" data-target-lang="es" onclick="switchLegendLang('es')" type="button">Español</button>
+            <button class="origin-legend-lang-btn" data-target-lang="en" onclick="switchLegendLang('en')" type="button">English</button>
+            <button class="origin-legend-lang-btn" data-target-lang="ru" onclick="switchLegendLang('ru')" type="button">Русский</button>
+        </div>
+
+        <div class="origin-legend-coda">
+            Golfo de Chiriquí <span class="sep">◆</span> Siglo XVI <span class="sep">◆</span> Isla La Porcada
+        </div>
+    </section>
+
+    <footer>
+        <img src="images/ECO.PNG" alt="EcoResort Logo" class="eco-logo" onerror="this.style.display='none';">
+        <p>© 2026 <strong>EcoResort La Porcada</strong> by <strong>Takyma Investment Pioneer</strong></p>
+    </footer>
+
+    <!-- MODAL ANEXOS OPERATIVOS (PIN + GRID DE ENLACES) -->
+    <div id="sealedModal" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.55); backdrop-filter:blur(6px); overflow-y:auto; padding:20px; box-sizing:border-box;">
+        <div class="annex-modal-inner" style="margin:auto; min-height:auto;">
+
+            <!-- BARRA SUPERIOR FIJA CON BOTÓN VOLVER (siempre visible) -->
+            <div style="position:sticky; top:0; z-index:20; background:linear-gradient(135deg, rgba(22,22,26,0.95) 0%, rgba(12,12,13,0.95) 100%); backdrop-filter:blur(10px); padding:12px 0 12px 0; margin:-50px -40px 20px -40px; padding-left:40px; padding-right:40px; border-bottom:1px solid rgba(212,180,131,0.2); display:flex; justify-content:space-between; align-items:center; gap:12px;">
+                <button class="annex-back-pin" onclick="closeAnnexAndBackToCarousel()" style="border-color:#d4b483; color:#d4b483; font-weight:600; margin:0;" data-es="← Volver al Menú" data-en="← Back to Menu">← Volver al Menú</button>
+                <span style="font-family:'Cormorant Garamond', serif; color:#d4b483; font-size:0.9rem; letter-spacing:2px; text-transform:uppercase; opacity:0.7;" data-es="Anexos Operativos" data-en="Operational Annexes">Anexos Operativos</span>
+                <button class="annex-modal-close" onclick="closeSealedModal()" style="position:relative; top:auto; right:auto; flex-shrink:0;">×</button>
+            </div>
+
+            <!-- ESTADO 1: PIN ENTRY -->
+            <div class="annex-pin-state" id="annexPinState">
+                <div class="annex-lock-icon">⚿</div>
+                <h3 class="annex-modal-title" data-es="Anexos Operativos" data-en="Operational Annexes">Anexos Operativos</h3>
+                <p class="annex-modal-subtitle" data-es="Acceso Restringido · Introduzca PIN" data-en="Restricted Access · Enter PIN">Acceso Restringido · Introduzca PIN</p>
+                <form class="annex-pin-form" onsubmit="checkAnnexPin(event)">
+                    <input type="password" class="annex-pin-input" id="annexPinInput" placeholder="PIN" required autocomplete="off">
+                    <button type="submit" class="annex-pin-btn" data-es="DESBLOQUEAR" data-en="UNLOCK">DESBLOQUEAR</button>
+                </form>
+                <div class="annex-pin-error" id="annexPinError"></div>
+                <div class="annex-pin-hint">
+                    <p data-es="« Lo que no se enseña existe. Solo se reserva para quien firma. »" data-en="« What is not shown exists. It is reserved for those who sign. »">« Lo que no se enseña existe. Solo se reserva para quien firma. »</p>
+                    <small>Takyma Investment Pioneer · 2026</small>
+                </div>
+            </div>
+
+            <!-- ESTADO 2: GRID DE ANEXOS (visible tras PIN correcto) -->
+            <div class="annex-grid-state" id="annexGridState">
+                <div class="annex-lock-icon" style="font-size:2rem; margin-bottom:10px;">◆</div>
+                <h3 class="annex-modal-title" data-es="Anexos Operativos" data-en="Operational Annexes">Anexos Operativos</h3>
+                <p class="annex-modal-subtitle" data-es="Documentación Operativa Disponible" data-en="Operational Documentation Available">Documentación Operativa Disponible</p>
+                <div class="annex-grid">
+                    <a href="https://seguridad-protocolo.netlify.app/" class="annex-card" target="_blank" rel="noopener noreferrer">
+                        <div class="annex-card-num">I</div>
+                        <h4 class="annex-card-title" data-es="Seguridad &amp; Protocolo" data-en="Security &amp; Protocol">Seguridad &amp; Protocolo</h4>
+                        <p class="annex-card-desc" data-es="Doctrina de protección integral · 4 capas · COS-1 + CRE-2 · 180 efectivos" data-en="Integrated protection doctrine · 4 layers · COS-1 + CRE-2 · 180 staff">Doctrina de protección integral · 4 capas · COS-1 + CRE-2 · 180 efectivos</p>
+                        <span class="annex-card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                    </a>
+                    <a href="https://rrhhporcada.netlify.app/" class="annex-card" target="_blank" rel="noopener noreferrer">
+                        <div class="annex-card-num">II</div>
+                        <h4 class="annex-card-title" data-es="RR.HH. &amp; Servicio" data-en="HR &amp; Service">RR.HH. &amp; Servicio</h4>
+                        <p class="annex-card-desc" data-es="AMAN · JANU · Hospital 50 camas · Condominios · Oasis · Casino · 2.600 staff" data-en="AMAN · JANU · 50-bed hospital · Condominiums · Oasis · Casino · 2,600 staff">AMAN · JANU · Hospital 50 camas · Condominios · Oasis · Casino · 2.600 staff</p>
+                        <span class="annex-card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                    </a>
+                    <a href="https://energia-autosuficiencia.netlify.app/" class="annex-card" target="_blank" rel="noopener noreferrer">
+                        <div class="annex-card-num">III</div>
+                        <h4 class="annex-card-title" data-es="Energía &amp; Autosuficiencia" data-en="Energy &amp; Self-Sufficiency">Energía &amp; Autosuficiencia</h4>
+                        <p class="annex-card-desc" data-es="Microred híbrida · 16 MWp FV + 1 MW eólico + 42 MWh BESS · 95 % renovable" data-en="Hybrid microgrid · 16 MWp PV + 1 MW wind + 42 MWh BESS · 95% renewable">Microred híbrida · 16 MWp FV + 1 MW eólico + 42 MWh BESS · 95 % renovable</p>
+                        <span class="annex-card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                    </a>
+                    <a href="https://gastroporcada.netlify.app/" class="annex-card" target="_blank" rel="noopener noreferrer">
+                        <div class="annex-card-num">IV</div>
+                        <h4 class="annex-card-title" data-es="Gastronomía" data-en="Gastronomy">Gastronomía</h4>
+                        <p class="annex-card-desc" data-es="Oferta culinaria · cocinas especializadas · experiencias gastronómicas del complejo" data-en="Culinary offering · specialized kitchens · gastronomic experiences of the complex">Oferta culinaria · cocinas especializadas · experiencias gastronómicas del complejo</p>
+                        <span class="annex-card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                    </a>
+                    <a href="https://wellnessmanglar.netlify.app/" class="annex-card" target="_blank" rel="noopener noreferrer">
+                        <div class="annex-card-num">V</div>
+                        <h4 class="annex-card-title" data-es="Wellness Manglar" data-en="Mangrove Wellness">Wellness Manglar</h4>
+                        <p class="annex-card-desc" data-es="Spa &amp; bienestar · terapias del manglar · medicina natural del Pacífico panameño" data-en="Spa &amp; wellness · mangrove therapies · natural medicine of the Panamanian Pacific">Spa &amp; bienestar · terapias del manglar · medicina natural del Pacífico panameño</p>
+                        <span class="annex-card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                    </a>
+                    <a href="https://visualporcada.netlify.app/" class="annex-card" target="_blank" rel="noopener noreferrer">
+                        <div class="annex-card-num">VI</div>
+                        <h4 class="annex-card-title" data-es="Visual La Porcada" data-en="Visual La Porcada">Visual La Porcada</h4>
+                        <p class="annex-card-desc" data-es="Video del interior de la isla hoy · antes de la ejecución del proyecto EcoResort" data-en="Video of the island's interior today · before the EcoResort project execution">Video del interior de la isla hoy · antes de la ejecución del proyecto EcoResort</p>
+                        <span class="annex-card-btn" data-es="ACCEDER" data-en="ACCESS">ACCEDER</span>
+                    </a>
+                </div>
+                <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:20px; padding-bottom:10px;">
+                    <button class="annex-back-pin" onclick="closeAnnexAndBackToCarousel()" style="border-color:#d4b483; color:#d4b483; font-weight:600;" data-es="← Volver al Menú" data-en="← Back to Menu">← Volver al Menú</button>
+                    <button class="annex-back-pin" onclick="backToAnnexPin()" data-es="↻ Volver al PIN" data-en="↻ Back to PIN">↻ Volver al PIN</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // VARIABLES GLOBALES DE ESTADO
+        let currentLang = 'ES';
+        let currentCategory = '';
+        let currentCategorySlides = [];
+        let slideIndex = 0;
+        let autoSlideInterval;
+        let isMuted = false;
+
+        // LÓGICA DE CONTRASEÑA
+        function checkPassword(event) {
+            event.preventDefault();
+            const password = document.getElementById('passInput').value;
+            const errorMsg = document.getElementById('errorMsg');
+            const lockScreen = document.getElementById('lockScreen');
+            const dashboard = document.getElementById('dashboard');
+            const bgVideo = document.getElementById('bgVideoWrapper');
+            const form = document.querySelector('.access-form');
+
+            if (password === 'TAKYMA2026') {
+                lockScreen.style.display = 'none';
+                dashboard.style.display = 'flex';
+                bgVideo.style.display = 'block'; // Mostrar el fondo de manglares
+                startBackgroundMusic(); // Arrancar la música
+                showLogoutButton(true); // Mostrar botón de volver al menú / cerrar sesión
+            } else {
+                errorMsg.innerText = currentLang === 'ES' ? 'Clave incorrecta. Acceso denegado.' : 'Incorrect key. Access denied.';
+                form.classList.add('shake');
+                setTimeout(() => form.classList.remove('shake'), 300);
+            }
+        }
+
+        // ============ BOTÓN VOLVER AL MENÚ / CERRAR SESIÓN ============
+        // Muestra u oculta el botón de logout en el top-bar.
+        // Se muestra cuando el usuario entra al dashboard (tras password correcta),
+        // y se oculta cuando vuelve al lock screen.
+        function showLogoutButton(show) {
+            const btn = document.getElementById('logoutBtn');
+            if (!btn) return;
+            btn.style.display = show ? 'inline-block' : 'none';
+        }
+
+        // Vuelve al lock screen (menú de contraseña) desde cualquier vista del dashboard.
+        // Cierra modales abiertos, resetea el carrusel al hub y detiene la música.
+        function logoutToLock() {
+            // Cerrar cualquier modal abierto (anexos, cierre cinematográfico)
+            closeSealedModal();
+            closeClosingOverlay();
+            // Reset del cierre cinematográfico
+            resetClosingState();
+            // Volver al hub si estamos en el carrusel
+            const carouselView = document.getElementById('carouselView');
+            const hubView = document.getElementById('hubView');
+            if (carouselView && carouselView.style.display === 'flex') {
+                clearInterval(autoSlideInterval);
+                document.querySelectorAll('.carousel-slide').forEach(slide => slide.classList.remove('active'));
+                carouselView.style.display = 'none';
+                if (hubView) hubView.style.display = 'block';
+            }
+            // Ocultar dashboard y mostrar lock screen
+            const dashboard = document.getElementById('dashboard');
+            const lockScreen = document.getElementById('lockScreen');
+            const bgVideo = document.getElementById('bgVideoWrapper');
+            if (dashboard) dashboard.style.display = 'none';
+            if (lockScreen) lockScreen.style.display = 'flex';
+            // Mantener el fondo de manglares visible (efecto cinematográfico) o ocultarlo
+            if (bgVideo) bgVideo.style.display = 'none';
+            // Detener música
+            const audio = document.getElementById('backgroundAudio');
+            if (audio) { audio.pause(); audio.currentTime = 0; }
+            // Ocultar botón logout
+            showLogoutButton(false);
+            // Limpiar campo de contraseña
+            const passInput = document.getElementById('passInput');
+            const errorMsg = document.getElementById('errorMsg');
+            if (passInput) passInput.value = '';
+            if (errorMsg) errorMsg.innerText = '';
+            // Focus en el campo de contraseña
+            if (passInput) setTimeout(() => passInput.focus(), 100);
+        }
+
+        // LÓGICA DE MÚSICA AMBIENTAL
+        function startBackgroundMusic() {
+            const audio = document.getElementById('backgroundAudio');
+            if (!audio) return;
+            audio.volume = 0;
+            audio.currentTime = 0;
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    fadeAudio(audio, 0, 0.4, 3000); // Fade in suave hasta 40% de volumen
+                }).catch(err => {
+                    console.log("Autoplay bloqueado. Reintentando en el primer click.");
+                    document.addEventListener('click', function retryPlay() {
+                        audio.play().then(() => fadeAudio(audio, 0, 0.4, 3000)).catch(()=>{});
+                        document.removeEventListener('click', retryPlay);
+                    });
+                });
+            }
+        }
+
+        function toggleMute() {
+            const audio = document.getElementById('backgroundAudio');
+            const btn = document.getElementById('muteBtn');
+            if (!audio) return;
+            isMuted = !isMuted;
+            if (isMuted) {
+                audio.muted = true;
+                btn.innerText = "🔈 Sound";
+            } else {
+                audio.muted = false;
+                btn.innerText = "🔊 Mute";
+            }
+        }
+
+        // LÓGICA DEL CARRUSEL Y CATEGORÍAS
+        let closingShownForCategory = ''; // evita que el cierre reaparezca cada vez que se vuelve al último slide
+        let closingTimeoutId = null; // ID del timeout pendiente del cierre cinematográfico (para poder cancelarlo)
+
+        function openCategory(catName) {
+            currentCategory = catName;
+            // Reset del cierre cinematográfico al entrar a un nuevo módulo,
+            // para que la próxima visita al Bloque VI vuelva a mostrar el overlay.
+            resetClosingState();
+            // FIX: limpiar TODOS los slides al entrar a un nuevo módulo,
+            // para que no quede ningún slide del módulo anterior con la clase 'active'.
+            document.querySelectorAll('.carousel-slide').forEach(slide => slide.classList.remove('active'));
+            document.getElementById('hubView').style.display = 'none';
+            const carouselView = document.getElementById('carouselView');
+            carouselView.style.display = 'flex';
+
+            const allSlides = document.querySelectorAll('.carousel-slide');
+            currentCategorySlides = Array.from(allSlides).filter(s => s.dataset.cat === catName);
+            
+            const dotsContainer = document.getElementById('carouselDots');
+            dotsContainer.innerHTML = '';
+            currentCategorySlides.forEach((slide, index) => {
+                const dot = document.createElement('span');
+                dot.className = 'dot';
+                if (index === 0) dot.classList.add('active');
+                dot.onclick = () => currentSlide(index);
+                dotsContainer.appendChild(dot);
+            });
+
+            updateCategoryTitle(catName);
+            slideIndex = 0;
+            showSlide(0);
+            startAutoSlide();
+        }
+
+        function backToHub() {
+            clearInterval(autoSlideInterval);
+            // FIX: limpiar TODOS los slides al volver al menú,
+            // para que no quede ninguna tarjeta en segundo plano.
+            document.querySelectorAll('.carousel-slide').forEach(slide => slide.classList.remove('active'));
+            document.getElementById('carouselView').style.display = 'none';
+            document.getElementById('hubView').style.display = 'block';
+            // Reset del cierre cinematográfico: cancela timeout, cierra overlay y resetea flag.
+            resetClosingState();
+        }
+
+        function updateCategoryTitle(catName) {
+            const titleEl = document.getElementById('categoryTitle');
+            let title = '';
+            if (catName === 'marketing') title = currentLang === 'ES' ? 'I. Plan de Marketing' : 'I. Marketing Plan';
+            else if (catName === 'financiero') title = currentLang === 'ES' ? 'II. Desarrollo Financiero' : 'II. Financial Development';
+            else if (catName === 'mercado') title = currentLang === 'ES' ? 'II. Estudio de Mercado' : 'II. Market Study';
+            else if (catName === 'proveedores') title = currentLang === 'ES' ? 'III. Proveedores Especiales' : 'III. Special Providers';
+            else if (catName === 'plandirector') title = currentLang === 'ES' ? 'V. Plan Director de Isla La Porcada' : 'V. Isla La Porcada Master Plan';
+            else if (catName === 'competencia') title = currentLang === 'ES' ? 'VI. Competencia · Pacífico Americano (fuera de Panamá)' : 'VI. Competition · American Pacific (outside Panama)';
+            
+            titleEl.style.opacity = 0;
+            setTimeout(() => {
+                titleEl.innerText = title;
+                titleEl.style.opacity = 1;
+            }, 200);
+        }
+
+        function showSlide(index) {
+            if (index >= currentCategorySlides.length) slideIndex = 0;
+            if (index < 0) slideIndex = currentCategorySlides.length - 1;
+
+            // FIX: limpiar TODOS los slides (no solo los de la categoría actual)
+            // para evitar que el último slide del módulo anterior se quede en segundo plano.
+            document.querySelectorAll('.carousel-slide').forEach(slide => slide.classList.remove('active'));
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            currentCategorySlides[slideIndex].classList.add('active');
+            if (dots[slideIndex]) dots[slideIndex].classList.add('active');
+
+            // CIERRE CINEMATOGRÁFICO: aparece en CUALQUIER slide del Bloque VI (competencia),
+            // no solo en el último. Se muestra una vez por visita al módulo;
+            // al cerrar el overlay no reaparece hasta que el usuario salga al menú y vuelva a entrar,
+            // o hasta que navegue manualmente con flechas/dots (ver moveSlide / currentSlide).
+            if (currentCategory === 'proveedores' && slideIndex === currentCategorySlides.length - 1 && !closingShownForCategory) {
+                closingShownForCategory = 'proveedores';
+                closingTimeoutId = setTimeout(() => {
+                    showClosingOverlay();
+                    closingTimeoutId = null;
+                }, 3500); // deja que el usuario vea la tarjeta de Activa Panamá un momento
+            }
+        }
+
+        // ============ CIERRE CINEMATOGRÁFICO ============
+        // Helper: cancela cualquier cierre pendiente, cierra el overlay si está visible
+        // y resetea el flag para que el cierre pueda volver a aparecer.
+        function resetClosingState() {
+            if (closingTimeoutId) {
+                clearTimeout(closingTimeoutId);
+                closingTimeoutId = null;
+            }
+            closeClosingOverlay();
+            closingShownForCategory = '';
+        }
+
+        function showClosingOverlay() {
+            const overlay = document.getElementById('closingOverlay');
+            if (!overlay) return;
+            overlay.classList.add('visible');
+            // Sube el volumen de la música suavemente para el momento cinematográfico
+            const audio = document.getElementById('backgroundAudio');
+            if (audio && !isMuted) {
+                fadeAudio(audio, audio.volume, 0.65, 4000);
+            }
+        }
+        function closeClosingOverlay() {
+            const overlay = document.getElementById('closingOverlay');
+            if (!overlay) return;
+            overlay.classList.remove('visible');
+            // Vuelve a bajar el volumen
+            const audio = document.getElementById('backgroundAudio');
+            if (audio && !isMuted) {
+                fadeAudio(audio, audio.volume, 0.4, 2500);
+            }
+        }
+
+        function moveSlide(step) {
+            // Al navegar manualmente con las flechas dentro del Bloque VI,
+            // reseteamos el cierre cinematográfico para que vuelva a aparecer en el nuevo expediente.
+            if (currentCategory === 'proveedores') resetClosingState();
+            slideIndex += step;
+            showSlide(slideIndex);
+            resetAutoSlide();
+        }
+
+        function currentSlide(index) {
+            // Igual que moveSlide, pero al pulsar un dot.
+            if (currentCategory === 'proveedores') resetClosingState();
+            slideIndex = index;
+            showSlide(slideIndex);
+            resetAutoSlide();
+        }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => {
+                slideIndex++;
+                showSlide(slideIndex);
+            }, 4500);
+        }
+
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            startAutoSlide();
+        }
+
+        // LÓGICA DE CAMBIO DE IDIOMA
+        function toggleLanguage() {
+            currentLang = currentLang === 'ES' ? 'EN' : 'ES';
+            const btn = document.getElementById('langBtn');
+            btn.innerText = currentLang === 'ES' ? '🌐 English' : '🌐 Español';
+
+            const elements = document.querySelectorAll('[data-es][data-en]');
+            elements.forEach(el => {
+                el.innerText = currentLang === 'ES' ? el.getAttribute('data-es') : el.getAttribute('data-en');
+            });
+
+            if (currentCategory) updateCategoryTitle(currentCategory);
+
+            // Sincroniza el idioma de la leyenda del origen del nombre con el idioma global.
+            // Si el global es EN, mostramos la leyenda en EN; en caso contrario ES.
+            // El ruso solo se selecciona manualmente desde la propia leyenda.
+            const legendLang = currentLang === 'EN' ? 'en' : 'es';
+            switchLegendLang(legendLang);
+        }
+
+        // ============ LEYENDA · ORIGEN DEL NOMBRE ============
+        // Alterna entre las tres versiones (ES / EN / RU) de la leyenda del origen
+        // del nombre «La Porcada» que aparece justo antes del footer.
+        function switchLegendLang(lang) {
+            const texts = document.querySelectorAll('.origin-legend-text');
+            const btns  = document.querySelectorAll('.origin-legend-lang-btn');
+            texts.forEach(t => {
+                if (t.dataset.lang === lang) {
+                    t.classList.remove('is-hidden');
+                    t.classList.add('is-active');
+                } else {
+                    t.classList.remove('is-active');
+                    t.classList.add('is-hidden');
+                }
+            });
+            btns.forEach(b => {
+                if (b.dataset.targetLang === lang) b.classList.add('is-active');
+                else b.classList.remove('is-active');
+            });
+        }
+
+        function fadeAudio(audioEl, fromVol, toVol, durationMs) {
+            const steps = 20;
+            const stepDuration = durationMs / steps;
+            const volumeStep = (toVol - fromVol) / steps;
+            let currentStep = 0;
+
+            const fadeInterval = setInterval(() => {
+                currentStep++;
+                const newVol = fromVol + (volumeStep * currentStep);
+                try { audioEl.volume = Math.max(0, Math.min(1, newVol)); } catch(e) {}
+
+                if (currentStep >= steps) {
+                    clearInterval(fadeInterval);
+                    try { audioEl.volume = toVol; } catch(e) {}
+                }
+            }, stepDuration);
+        }
+
+        // ============ MODAL ANEXOS OPERATIVOS (PIN + GRID) ============
+        // ╔══════════════════════════════════════════════════════════╗
+        // ║  PIN DE ACCESO A ANEXOS OPERATIVOS                         ║
+        // ║  Para cambiar el PIN, modifica únicamente la línea below.  ║
+        // ║  PIN actual: PORCADA26                                     ║
+        // ╚══════════════════════════════════════════════════════════╝
+        const ANNEX_PIN = 'PORCADA26';
+
+        function openSealedModal(event) {
+            event.preventDefault();
+            const modal = document.getElementById('sealedModal');
+            if (!modal) return;
+            // Al abrir, mostrar siempre el estado PIN primero
+            showAnnexPinState();
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            // Focus en el input tras la animación
+            setTimeout(() => {
+                const input = document.getElementById('annexPinInput');
+                if (input) input.focus();
+            }, 200);
+        }
+        function closeSealedModal() {
+            const modal = document.getElementById('sealedModal');
+            if (!modal) return;
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+            // Reset al estado PIN al cerrar (para la próxima apertura)
+            setTimeout(showAnnexPinState, 300);
+        }
+        function checkAnnexPin(event) {
+            event.preventDefault();
+            const input = document.getElementById('annexPinInput');
+            const errorEl = document.getElementById('annexPinError');
+            const form = document.querySelector('.annex-pin-form');
+            if (!input) return;
+            const enteredPin = input.value.trim();
+            if (enteredPin === ANNEX_PIN) {
+                // PIN correcto: mostrar grid de anexos
+                errorEl.innerText = '';
+                showAnnexGridState();
+            } else {
+                // PIN incorrecto: error + shake
+                errorEl.innerText = currentLang === 'ES'
+                    ? 'PIN incorrecto. Acceso denegado.'
+                    : 'Incorrect PIN. Access denied.';
+                if (form) {
+                    form.classList.add('shake');
+                    setTimeout(() => form.classList.remove('shake'), 300);
+                }
+                input.value = '';
+                input.focus();
+            }
+        }
+        function showAnnexPinState() {
+            const pinState = document.getElementById('annexPinState');
+            const gridState = document.getElementById('annexGridState');
+            if (pinState) { pinState.classList.remove('hidden'); pinState.style.display = 'block'; }
+            if (gridState) { gridState.classList.remove('visible'); gridState.style.display = 'none'; }
+            // Limpiar input y error
+            const input = document.getElementById('annexPinInput');
+            const errorEl = document.getElementById('annexPinError');
+            if (input) input.value = '';
+            if (errorEl) errorEl.innerText = '';
+        }
+        function showAnnexGridState() {
+            const pinState = document.getElementById('annexPinState');
+            const gridState = document.getElementById('annexGridState');
+            if (pinState) { pinState.classList.add('hidden'); pinState.style.display = 'none'; }
+            if (gridState) { gridState.classList.add('visible'); gridState.style.display = 'block'; }
+        }
+        function backToAnnexPin() {
+            showAnnexPinState();
+            setTimeout(() => {
+                const input = document.getElementById('annexPinInput');
+                if (input) input.focus();
+            }, 200);
+        }
+
+        // Cierra el modal de anexos y vuelve al carrusel (donde estaba la tarjeta sellada).
+        // Es el botón "← Volver al Menú" que el usuario pide para salir de los anexos
+        // y volver a la navegación normal del dashboard.
+        function closeAnnexAndBackToCarousel() {
+            closeSealedModal();
+        }
+    </script>
+</body>
+</html>
+
+
+
